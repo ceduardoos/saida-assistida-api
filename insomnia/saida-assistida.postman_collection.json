@@ -1,0 +1,857 @@
+{
+  "info": {
+    "name": "Egide - Saida Assistida API",
+    "description": "Roteiro de testes da API Java (GS 2026/2). Troque a variavel base pela URL do Render ao publicar.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Setores",
+      "item": [
+        {
+          "name": "POST setor (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/setores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Setor 4 - Teste\",\n  \"referencia\": \"Rua X\",\n  \"nivelRisco\": \"ALTO\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET setores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET setor 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT setor 4",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/setores/4",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "4"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Setor 4 - Teste editado\",\n  \"referencia\": \"Rua X ate Rua Y\",\n  \"nivelRisco\": \"MEDIO\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE setor 4 (204)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores/4",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "4"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET moradores do setor 1 (rota aninhada)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores/1/moradores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "1",
+                "moradores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET setor 999 (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores/999",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "999"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE setor 1 com moradores (409)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Moradores",
+      "item": [
+        {
+          "name": "POST morador (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/moradores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idSetor\": 1,\n  \"nome\": \"Ana L. (ficticio)\",\n  \"endereco\": \"Rua C, 88\",\n  \"contato\": \"(11) 90000-0003\",\n  \"latitude\": -23.5521,\n  \"longitude\": -46.6351,\n  \"precisaMaca\": false,\n  \"usaCadeiraRodas\": true,\n  \"qtAcompanhante\": 1,\n  \"barreiraAcesso\": \"Portao estreito\",\n  \"codigoConfirmacao\": \"MOR-0003\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST morador invalido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/moradores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idSetor\": 1,\n  \"nome\": \"\",\n  \"latitude\": 200\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST JSON quebrado (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/moradores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nome\": ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET moradores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/moradores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET morador 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/moradores/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT saida da lista (morador 2)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/moradores/2/saida-da-lista",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores",
+                "2",
+                "saida-da-lista"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE morador 1 com atendimento (409)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/moradores/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "moradores",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Confirmacao do cuidador",
+      "item": [
+        {
+          "name": "GET por codigo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/confirmacoes/MOR-0001",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "confirmacoes",
+                "MOR-0001"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT confirmar necessidades",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/confirmacoes/MOR-0001",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "confirmacoes",
+                "MOR-0001"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contato\": \"(11) 90000-0001\",\n  \"precisaMaca\": true,\n  \"usaCadeiraRodas\": false,\n  \"qtAcompanhante\": 1,\n  \"barreiraAcesso\": \"Escada na entrada, 12 degraus\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET codigo inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/confirmacoes/XXX-9999",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "confirmacoes",
+                "XXX-9999"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Veiculos e destinos",
+      "item": [
+        {
+          "name": "GET veiculos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/veiculos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "veiculos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST veiculo (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/veiculos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "veiculos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Van DC-04\",\n  \"tipo\": \"VAN_ADAPTADA\",\n  \"qtAssentos\": 6,\n  \"qtCadeiras\": 1,\n  \"qtMacas\": 0,\n  \"disponivel\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET destinos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/destinos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "destinos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST destino (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/destinos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "destinos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Casa da filha (ficticio)\",\n  \"tipo\": \"CASA_FAMILIAR\",\n  \"endereco\": \"Rua M, 10\",\n  \"qtVagas\": 3,\n  \"acessivel\": false,\n  \"disponivel\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Alerta e atendimentos",
+      "item": [
+        {
+          "name": "GET alertas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/alertas",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST alerta (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/alertas",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idSetor\": 2,\n  \"nivel\": \"LARANJA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET elegiveis do alerta 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/alertas/1/elegiveis",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas",
+                "1",
+                "elegiveis"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST incluir morador 1 no alerta 1 (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/alertas/1/atendimentos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas",
+                "1",
+                "atendimentos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idMorador\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST repetir inclusao (409 RN01)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/alertas/1/atendimentos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas",
+                "1",
+                "atendimentos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idMorador\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET atendimentos do alerta 1 (rota aninhada)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/alertas/1/atendimentos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "alertas",
+                "1",
+                "atendimentos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT designar carro comum p/ quem precisa de maca (409 RN02)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/atendimentos/1/designacao",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1",
+                "designacao"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idVeiculo\": 3,\n  \"idDestino\": 2,\n  \"responsavel\": \"Equipe Alfa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT designar ambulancia (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/atendimentos/1/designacao",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1",
+                "designacao"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idVeiculo\": 1,\n  \"idDestino\": 2,\n  \"responsavel\": \"Equipe Alfa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT chegada antes do embarque (409 RN05)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/atendimentos/1/marcos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1",
+                "marcos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marco\": \"CHEGADA_CONFIRMADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT marco embarque (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/atendimentos/1/marcos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1",
+                "marcos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marco\": \"EMBARCADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT marco chegada (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/atendimentos/1/marcos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1",
+                "marcos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marco\": \"CHEGADA_CONFIRMADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET atendimento 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/atendimentos/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "atendimentos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH em /setores (405)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/setores",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "setores"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
