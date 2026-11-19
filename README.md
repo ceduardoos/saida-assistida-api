@@ -9,7 +9,7 @@
 | Leonardo de Souza Bernardo | 570951 |
 | Luiz Gustavo Albuquerque B. Guedes | 565843 |
 
-- **API publicada (Render):** _(preencher após o deploy)_
+- **API publicada (Render):** `https://saida-assistida-api.onrender.com` · [Consultar os setores](https://saida-assistida-api.onrender.com/setores)
 - **Vídeo (YouTube, até 5 min):** _(preencher)_
 - **Front (Vercel):** _(preencher)_
 
