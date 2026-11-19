@@ -10,7 +10,8 @@
 | Luiz Gustavo Albuquerque B. Guedes | 565843 |
 
 - **API publicada (Render):** `https://saida-assistida-api.onrender.com` · [Consultar os setores](https://saida-assistida-api.onrender.com/setores)
-- **Vídeo (YouTube, até 5 min):** _(preencher)_
+- [Assistir à demonstração da API Java no YouTube](https://youtu.be/QHlwHYGYcaY)
+- [Abrir a pasta com o vídeo no Google Drive](https://drive.google.com/drive/folders/1CGu0klRNtebCfeWJ16WJp-q2tEa8NuCV?usp=sharing) caso o YouTube esteja indisponível.
 - **Front (Vercel):** _(preencher)_
 
 ## O que a API resolve
