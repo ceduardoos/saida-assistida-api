@@ -2,6 +2,7 @@ package br.com.fiap.saidaassistida.controller;
 
 import br.com.fiap.saidaassistida.dao.MoradorDao;
 import br.com.fiap.saidaassistida.dao.SetorDao;
+import br.com.fiap.saidaassistida.dto.MoradorEdicaoRequestDto;
 import br.com.fiap.saidaassistida.dto.MoradorRequestDto;
 import br.com.fiap.saidaassistida.dto.MoradorResponseDto;
 import br.com.fiap.saidaassistida.exception.DadosInvalidosException;
@@ -56,18 +57,14 @@ public class MoradorController {
     }
 
     @PutMapping("/{id}")
-    public MoradorResponseDto atualizar(@PathVariable int id, @Valid @RequestBody MoradorRequestDto dto)
+    public MoradorResponseDto atualizar(@PathVariable int id, @Valid @RequestBody MoradorEdicaoRequestDto dto)
             throws SQLException, EntidadeNaoEncontradaException, DadosInvalidosException {
         if (dto.getIdSetor() <= 0) throw new DadosInvalidosException("idSetor deve ser informado");
-        Morador existente = dao.pesquisarPorId(id);
         Morador morador = mapper.map(dto, Morador.class);
         morador.setId(id);
         morador.setSetor(setorDao.pesquisarPorId(dto.getIdSetor()));
         dao.atualizar(morador);
-        morador.setCodigoConfirmacao(existente.getCodigoConfirmacao());
-        morador.setSituacaoCadastro(existente.getSituacaoCadastro());
-        morador.setDataConfirmacao(existente.getDataConfirmacao());
-        return mapper.map(morador, MoradorResponseDto.class);
+        return mapper.map(dao.pesquisarPorId(id), MoradorResponseDto.class);
     }
 
     // RN08: pedido de saida da lista (nao e DELETE)
